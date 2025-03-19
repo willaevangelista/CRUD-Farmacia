@@ -1,9 +1,9 @@
 package com.generation.CRUD_Farmacia.model;
 
 import java.math.BigDecimal;
-import java.time.LocalTime;
+import java.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,10 +27,6 @@ public class Produto {
 	@Size(max = 100, message = "O atributo nome do produto tem que ser menor que 100 caracteres!")
 	private String nome;
 	
-	@NotBlank(message = "O atributo segmento é obrigatório!")
-	@Size(max = 100, message = "O atributo segmento tem que ser menor que 100 caracteres!")
-	private String segmento;
-	
 	@NotBlank(message = "O atributo descricao do produto é obrigatório!")
 	@Size(max = 100, message = "O atributo descricao do produto tem que ser menor que 100 caracteres!")
 	private String descricao;
@@ -38,14 +34,18 @@ public class Produto {
 	@NotNull(message = "O atributo preco do produto é obrigatório!")
 	private BigDecimal preco;
 	
+	@NotBlank(message = "O atributo tarja do produto é obrigatório!")
+	@Size(max = 100, message = "O atributo tarja do produto tem que ser menor que 100 caracteres!")
+	private String tarja;
+	
 	@NotNull(message = "O atributo data de validade do produto é obrigatório!")
-	private LocalTime dataValidade;
+	private LocalDate dataValidade;
 	
 	@NotNull(message = "O atributo quantidade em estoque do produto é obrigatório!")
 	private Integer quantidadeEstoque;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("produtos") 
+	@JsonBackReference
 	private Categoria categoria;
 
 	public Long getId() {
@@ -64,14 +64,6 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public String getSegmento() {
-		return segmento;
-	}
-
-	public void setSegmento(String segmento) {
-		this.segmento = segmento;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -88,11 +80,19 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public LocalTime getDataValidade() {
+	public String getTarja() {
+		return tarja;
+	}
+
+	public void setTarja(String tarja) {
+		this.tarja = tarja;
+	}
+
+	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
 
-	public void setDataValidade(LocalTime dataValidade) {
+	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
 
